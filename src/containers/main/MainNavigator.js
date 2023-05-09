@@ -8,8 +8,12 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import DirectMessageScreen from './home/DirectMessage/DirectMessageScreen';
 import StoryScreen from './home/story/StoryScreen';
 import colors from '../../res/colors';
+import { useTheme } from '@react-navigation/native';
+
 
 export default function MainNavigator({navigation}) {
+  const ThemeColors = useTheme().colors;
+
   const Stack = createStackNavigator();
   const NavigateToStoryCamera = () => navigation.navigate('StoryCamera');
   return (
@@ -81,7 +85,7 @@ export default function MainNavigator({navigation}) {
           ),
           headerBackTitleVisible: false,
           headerStyle: {
-            backgroundColor: colors.bottomBackGround,
+            backgroundColor: ThemeColors.card,
             shadowColor: colors.seperatorLineColor,
           },
           headerLeft: () => (
@@ -124,7 +128,7 @@ export default function MainNavigator({navigation}) {
         component={StoryScreen}
         navigation={navigation}
         options={{
-          headerStyle: {backgroundColor: 'black', shadowColor: 'black'},
+          headerStyle: {backgroundColor: ThemeColors.card, shadowColor: ThemeColors.card},
           title: '',
           headerLeft: () => <View></View>,
         }}

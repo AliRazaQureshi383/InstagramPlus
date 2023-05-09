@@ -5,9 +5,11 @@ import {View, Text, Dimensions} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 import colors from 'res/colors';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import { useTheme } from '@react-navigation/native';
 
 export default function searchNavigator() {
   const Stack = createStackNavigator();
+  const ThemeColors = useTheme().colors;
 
   return (
     <Stack.Navigator>
@@ -17,15 +19,15 @@ export default function searchNavigator() {
         options={{
           title: '',
           headerStyle: {
-            backgroundColor: colors.bottomBackGround,
+            backgroundColor: ThemeColors.card,
             shadowColor: 'transparent',
           },
           headerTitle: () => <View></View>,
           headerLeft: () => (
-            <View style={{marginHorizontal: 5, marginVertical: 10}}>
+            <View style={{marginHorizontal: 5, marginVertical: 10 ,}}>
               <TextInput
                 style={{
-                  backgroundColor: colors.textInputBackground,
+                  backgroundColor: '#FAF9F6',
                   height: 35,
                   width: Dimensions.get('screen').width - 10,
                   fontWeight: 'bold',

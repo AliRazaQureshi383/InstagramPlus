@@ -1,8 +1,11 @@
 import React from 'react';
 import {Text, View, StyleSheet, Vibration} from 'react-native';
 import colors from 'res/colors';
+import { useTheme } from '@react-navigation/native';
 
 export default function PostText({post}) {
+  const ThemeColors = useTheme().colors;
+
   return (
     <View
       style={{
@@ -14,7 +17,7 @@ export default function PostText({post}) {
       <Text style={{color: colors.text, fontWeight: 'bold', fontSize: 13}}>
         {post.userName}
       </Text>
-      <Text style={{color: colors.text}}>{post.text}</Text>
+      <Text style={{color: ThemeColors.text}}>{post.text}</Text>
     </View>
   );
 }

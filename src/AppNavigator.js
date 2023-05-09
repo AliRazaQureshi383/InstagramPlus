@@ -15,28 +15,34 @@ import MainNavigator from './containers/main/MainNavigator';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import images from 'res/images';
 import colors from './res/colors';
-
+import { NavigationContainer, useTheme } from '@react-navigation/native';
+import { useColorScheme } from 'react-native';
+import SignupScreen from './containers/auth/SignupScreen';
+import { useNavigation } from '@react-navigation/native';
 StatusBar.setBarStyle('light-content');
 
 export default function AppNavigator() {
-  const [validate, setValidate] = React.useState(false); //giriş yapılınca geri geri gelmeyi deaktif etmek için kullandık
+  const ThemeColors = useTheme().colors;
+  const theme = useColorScheme();
+const navigation = useNavigation();
+  const [validate, setValidate] = React.useState(false); 
   function LoginScreen() {
     const _signInAsync = async () => {
       setValidate(true);
     };
     return (
-      <View style={Styles.container}>
+      <View style={[Styles.container, {backgroundColor : ThemeColors.card}]}>
         <View style={Styles.logoContainer}>
-          <Image source={images.logo} style={{height: 70, width: 200}} />
+          <Image source={theme === 'dark' ?   images.logo :images.logoBlack }  style={{height: 70, width: 200}} />
         </View>
-        <View style={Styles.userNameContainer}>
+        <View style={[Styles.userNameContainer, {backgroundColor : ThemeColors.card}]}>
           <TextInput
             style={Styles.userNameInput}
             placeholder="Phone number, username or email"
             placeholderTextColor={colors.textFaded2}
           />
         </View>
-        <View style={Styles.passwordContainer}>
+        <View style={[Styles.passwordContainer,{backgroundColor : ThemeColors.card}]}>
           <TextInput
             secureTextEntry={true}
             style={Styles.passwordInput}
@@ -98,7 +104,7 @@ export default function AppNavigator() {
             marginTop: 20,
           }}>
           <Text style={{color: '#969696'}}>Don't have an account ?</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>{navigation.navigate('Signup')}} >
             <Text style={{color: '#008bef'}}> Sign Up.</Text>
           </TouchableOpacity>
         </View>
@@ -113,6 +119,16 @@ export default function AppNavigator() {
       <Stack.Screen
         name="Login"
         component={LoginScreen}
+        options={{
+          headerStyle: {backgroundColor: '#000'},
+          headerTintColor: '#fff',
+          headerTransparent: true,
+          title: '',
+        }}
+      />
+      <Stack.Screen
+        name="Signup"
+        component={SignupScreen}
         options={{
           headerStyle: {backgroundColor: '#000'},
           headerTintColor: '#fff',

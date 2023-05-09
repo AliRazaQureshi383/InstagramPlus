@@ -6,8 +6,11 @@ import {Text} from 'react-native';
 import {Image} from 'react-native';
 import images from 'res/images';
 import StoryContainer from './story/StoryContainer';
+import { useTheme } from '@react-navigation/native';
 
 export default function homeScreen({navigation}) {
+  const ThemeColors = useTheme().colors;
+
   const data = [
     {key: '1'},
     {key: '2'},
@@ -68,7 +71,7 @@ export default function homeScreen({navigation}) {
 
   return (
     <FlatList
-      style={{backgroundColor: colors.background}}
+      style={{backgroundColor: ThemeColors.card}}
       data={data}
       ListHeaderComponent={() => (
         <StoryContainer stories={stories} storyOnPress={storyOnPress} />

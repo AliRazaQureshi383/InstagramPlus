@@ -2,35 +2,21 @@ import React from 'react';
 import {View, Text, FlatList, Image, ImageBackground, TouchableOpacity} from 'react-native';
 import palette from 'res/palette';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
+import { useTheme } from '@react-navigation/native';
+
 export default function listings() {
   const navigation = useNavigation();
-  const category = [
-    {
-      _id: '62fe244f58f7aa8230817f89',
-      title: 'Garments',
-      imageUrl:['https://picsum.photos/id/10/200/200','https://picsum.photos/id/11/200/200','https://picsum.photos/id/12/200/200',]   
-        },
-    {
-      _id: '62fe243858f7aa8230817f86',
-      title: 'Electornics',
-      imageUrl:['https://picsum.photos/id/20/200/200','https://picsum.photos/id/21/200/200','https://picsum.photos/id/22/200/200',]   
-     },
-    {
-      _id: '62fe241958f7aa8230817f83',
-      title: 'Cosmentics',
-      imageUrl:['https://picsum.photos/id/30/200/200','https://picsum.photos/id/31/200/200','https://picsum.photos/id/32/200/200',]   
-       },
-    {
-      _id: '62fe246858f7aa8230817f8c',
-      title: 'Groceries',
-      imageUrl:['https://picsum.photos/id/40/200/200','https://picsum.photos/id/41/200/200','https://picsum.photos/id/42/200/200',]   
-    },
-  ];
+  const value = useSelector((state)=> state);
+  console.log('ppppp',value.loginReducer.data);
+  const ThemeColors = useTheme().colors;
+
+  const category = value.loginReducer.data;
   return (
 
-    <View style={palette.container.center}>
+    <View style={[palette.container.center, {backgroundColor : ThemeColors.card}]}>
     
-      <Text style={palette.text}>Market Place</Text>
+      <Text style={[palette.text, {color : ThemeColors.text}]}>Market Place</Text>
       <FlatList
         // refreshControl={
         //   <RefreshControl

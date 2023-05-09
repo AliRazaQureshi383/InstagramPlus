@@ -10,13 +10,16 @@ import LineSeperator from './LineSeperator';
 import ProfileGrid from './ProfileGrid';
 import colors from '../../../res/colors';
 import GridIcon from './gridIcon';
+import { useTheme } from '@react-navigation/native';
 
 const data = [{key: '1'}];
 
 export default function profileScreen() {
+  const ThemeColors = useTheme().colors;
+
   return (
     <FlatList
-      style={{flex: 1, backgroundColor: colors.bottomBackGround}}
+      style={{flex: 1, backgroundColor: ThemeColors.card}}
       /*<ProfileHeader />
       <UserBio />
       <EditProfileButton />
@@ -29,7 +32,7 @@ export default function profileScreen() {
           <ProfileHeader />
           <UserBio />
           <EditProfileButton />
-          <ConstantStories />
+          {/* <ConstantStories /> */}
           <LineSeperator />
           <GridIcon />
           <ProfileGrid />

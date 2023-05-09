@@ -1,8 +1,11 @@
 import React from 'react';
 import {View, Image, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { useTheme } from '@react-navigation/native';
 
 export default function StoryListItem({item, storyOnPress}) {
+  const ThemeColors = useTheme().colors;
+
   return (
     <View style={Styles.container}>
       <TouchableOpacity onPress={storyOnPress}>
@@ -11,7 +14,7 @@ export default function StoryListItem({item, storyOnPress}) {
           start={{x: 0.0, y: 1.0}}
           end={{x: 1.0, y: 1.0}}
           style={{borderRadius: 100, padding: 2}}>
-          <View style={{borderWidth: 2, borderRadius: 100}}>
+          <View style={{borderWidth: 2, borderRadius: 100 , borderColor : ThemeColors.card}}>
             <Image
               source={{uri: item.src}}
               style={{width: 55, height: 55, borderRadius: 70}}

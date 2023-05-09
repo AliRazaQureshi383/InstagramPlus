@@ -10,9 +10,13 @@ import activityNavigator from './activity/activityNavigator';
 import addPostNavigator from './addPost/addPostNavigator';
 import profileNavigator from './profile/profileNavigator';
 import searchNavigator from './search/searchNavigator';
+import { useTheme } from '@react-navigation/native';
 
 export default function TabNavigator({NavigateToStoryCamera}) {
   const Tab = createBottomTabNavigator();
+  
+  const ThemeColors = useTheme().colors;
+
   return (
     <React.Fragment>
       <Tab.Navigator
@@ -20,7 +24,7 @@ export default function TabNavigator({NavigateToStoryCamera}) {
           showLabel: true,
           showIcon: true,
           style: {
-            backgroundColor: colors.bottomBackGround,
+            backgroundColor: ThemeColors.card,
             borderTopColor: colors.seperatorLineColor,
           },
         }}

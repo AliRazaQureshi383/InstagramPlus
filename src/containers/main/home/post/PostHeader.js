@@ -4,23 +4,34 @@ import palette from 'res/palette';
 import images from 'res/images';
 import colors from 'res/colors';
 import PostImage from './PostImage';
+import { useTheme } from '@react-navigation/native';
+import { useColorScheme } from 'react-native';
+import xyx from '../../../../res/images/xyx.png'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function PostHeader({post}) {
+  const ThemeColors = useTheme().colors;
+  const theme = useColorScheme();
+
   return (
-    <View style={Styles.container}>
+    <View style={[Styles.container,{backgroundColor: ThemeColors.card}]}>
       <View style={Styles.nameContainer}>
         <Image
           source={{uri: 'https://picsum.photos/300'}}
           style={Styles.personImage}
         />
         <View>
-          <Text style={Styles.personName}> {post.userName} </Text>
-          <Text style={Styles.placeName}> {post.placeName} </Text>
+          <Text style={[Styles.personName , {color: ThemeColors.text}]}> {post.userName} </Text>
+          <Text style={[Styles.placeName, {color: ThemeColors.text}]}> {post.placeName} </Text>
         </View>
       </View>
       <View>
         <TouchableOpacity>
-          <Image source={images.more} style={Styles.iconMore} />
+          <View>
+          {/* <Image source = {theme === 'dark' ? images.more :   xyx } style={Styles.iconMore} /> */}
+          <Icon name="ellipsis-h" size={30} color= {theme === 'dark' ? 'white' : 'black'} />
+
+          </View>
         </TouchableOpacity>
       </View>
     </View>
@@ -60,6 +71,7 @@ const Styles = StyleSheet.create({
   },
   iconMore: {
     height: 15,
-    width: 15,
+    width: 25,
+
   },
 });

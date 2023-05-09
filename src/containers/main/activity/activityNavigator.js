@@ -3,9 +3,11 @@ import {createStackNavigator} from '@react-navigation/stack';
 import activityScreen from './activityScreen';
 import colors from 'res/colors';
 import {Text} from 'react-native';
+import { useTheme } from '@react-navigation/native';
 
 export default function activityNavigator() {
   const Stack = createStackNavigator();
+  const ThemeColors = useTheme().colors;
 
   return (
     <Stack.Navigator>
@@ -15,12 +17,12 @@ export default function activityNavigator() {
         options={{
           //headerTransparent: true,
           headerTitle: () => (
-            <Text style={{color: 'white', fontWeight: 'bold', fontSize: 17}}>
+            <Text style={{color: ThemeColors.text, fontWeight: 'bold', fontSize: 17}}>
               Market Place
             </Text>
           ),
           headerStyle: {
-            backgroundColor: colors.bottomBackGround,
+            backgroundColor: ThemeColors.card,
             shadowColor: colors.seperatorLineColor,
           },
         }}

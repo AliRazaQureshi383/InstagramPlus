@@ -2,6 +2,7 @@ import React from 'react';
 import {ScrollView, View, Text} from 'react-native';
 import colors from 'res/colors';
 import {FlatList, TouchableOpacity} from 'react-native-gesture-handler';
+import { useTheme } from '@react-navigation/native';
 
 const data = [
   {key: '1', tag: 'IGTV'},
@@ -19,6 +20,8 @@ const data = [
 ];
 
 function TagContainer({tag}) {
+  const ThemeColors = useTheme().colors;
+
   return (
     <TouchableOpacity onPress={() => console.log('Pressed Search Tag')}>
       <View
@@ -29,12 +32,12 @@ function TagContainer({tag}) {
           borderRadius: 8,
           justifyContent: 'center',
           marginBottom: 10,
-          backgroundColor: '#000',
+          backgroundColor: ThemeColors.card,
           marginHorizontal: 5,
         }}>
         <Text
           style={{
-            color: 'white',
+            color: ThemeColors.text,
             marginHorizontal: 15,
             fontWeight: 'bold',
           }}>
@@ -46,11 +49,13 @@ function TagContainer({tag}) {
 }
 
 export default function SearchTopTags() {
+  const ThemeColors = useTheme().colors;
+
   return (
     <FlatList
       horizontal={true}
       showsHorizontalScrollIndicator={false}
-      style={{backgroundColor: colors.bottomBackGround}}
+      style={{backgroundColor: ThemeColors.card}}
       data={data}
       renderItem={({item, index}) => <TagContainer tag={item.tag} />}
     />

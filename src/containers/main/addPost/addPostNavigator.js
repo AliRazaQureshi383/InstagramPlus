@@ -14,7 +14,7 @@ export default function addPostNavigator() {
         component={addPostScreen}
         options={{
           headerStyle: {
-            backgroundColor: colors.bottomBackGround,
+            // backgroundColor: colors.bottomBackGround,
             shadowColor: colors.seperatorLineColor,
           },
         }}
