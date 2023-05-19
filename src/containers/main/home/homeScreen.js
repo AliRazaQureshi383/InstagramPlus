@@ -27,7 +27,7 @@ export default function homeScreen({navigation}) {
   const storyOnPress = () => navigation.navigate('StoryScreen');
 
   const post = {
-    userName: 'Ali Raza',
+    userName: 'Alex',
     placeName: 'Istanbul, Turkey',
     imgUrl: 'https://picsum.photos/1920/1080',
     likeCount: 103,

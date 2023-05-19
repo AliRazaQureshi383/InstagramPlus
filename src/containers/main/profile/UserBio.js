@@ -14,7 +14,7 @@ export default function UserBio() {
         marginTop: 20,
       }}>
       <View style={{marginBottom: 5}}>
-        <Text style={{color: ThemeColors.text, fontWeight: 'bold'}}>Ali Raza</Text>
+        <Text style={{color: ThemeColors.text, fontWeight: 'bold'}}>Alex</Text>
       </View>
       <View style={{marginBottom: 5}}>
         <Text style={{color: ThemeColors.text}}>
