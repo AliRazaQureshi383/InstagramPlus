@@ -6,18 +6,21 @@ import MessagesList from './MessagesList';
 import {FlatList, TouchableOpacity} from 'react-native-gesture-handler';
 import colors from 'res/colors';
 import images from 'res/images';
+import { useTheme } from '@react-navigation/native';
 
 const data = [{key: '1'}];
 
 export default function DirectMessageScreen() {
+  const ThemeColors = useTheme().colors;
+
   return (
     <>
       <FlatList
-        style={{backgroundColor: '#000', flex: 1}}
+        style={{backgroundColor: ThemeColors.card, flex: 1}}
         data={data}
         renderItem={() => (
           <>
-            <DirectMessageSearch />
+            {/* <DirectMessageSearch /> */}
             <Title />
             <MessagesList />
           </>
@@ -26,7 +29,7 @@ export default function DirectMessageScreen() {
       <TouchableOpacity>
         <View
           style={{
-            backgroundColor: colors.bottomBackGround,
+            backgroundColor: ThemeColors.card,
             height: 45,
             justifyContent: 'center',
             alignItems: 'center',

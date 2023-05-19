@@ -1,15 +1,18 @@
 import React from 'react';
 import {View, Dimensions, TextInput, Text} from 'react-native';
 import colors from 'res/colors';
+import { useTheme } from '@react-navigation/native';
 
 export default function DirectMessageSearch() {
+  const ThemeColors = useTheme().colors;
+
   return (
     <View>
       <TextInput
         placeholder="Search"
         placeholderTextColor={colors.textFaded2}
         style={{
-          backgroundColor: colors.textInputBackground,
+          backgroundColor: ThemeColors.card,
           height: 40,
           borderRadius: 10,
           marginHorizontal: 10,

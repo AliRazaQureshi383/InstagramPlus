@@ -8,12 +8,20 @@ import {
   StyleSheet,
   Image,
   StatusBar,
+  Alert,
+  ScrollView
 } from 'react-native';
+import {useSignInMutation} from'../src/services/api';
+
+import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
+import { useEffect } from 'react';
 import palette from 'res/palette';
 import TabNavigator from './containers/main/TabNavigator';
 import MainNavigator from './containers/main/MainNavigator';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import images from 'res/images';
+import googleLogo from '../src/res/images/googleLogo.png'
+import TopLogo from '../src/res/images/L1.png'
 import colors from './res/colors';
 import { NavigationContainer, useTheme } from '@react-navigation/native';
 import { useColorScheme } from 'react-native';
@@ -22,6 +30,8 @@ import { useNavigation } from '@react-navigation/native';
 StatusBar.setBarStyle('light-content');
 
 export default function AppNavigator() {
+  const [createResponse, responseInfo] = useSignInMutation();
+
   const ThemeColors = useTheme().colors;
   const theme = useColorScheme();
 const navigation = useNavigation();
@@ -30,12 +40,68 @@ const navigation = useNavigation();
     const _signInAsync = async () => {
       setValidate(true);
     };
+    useEffect(() => {
+      GoogleSignin.configure({
+        webClientId:
+        "253730982593-fhq544g34hil0vkk849pab27s4uschnk.apps.googleusercontent.com",
+      });
+    }, []);
+    const signIn = async () => {
+      try {
+        await GoogleSignin.hasPlayServices();
+        const userInfo = await GoogleSignin.signIn();
+        console.log('userInfo',userInfo.user);
+        userInfo.user.email && (navigation.navigate('Login'), Alert.alert('Signin Successfull')  )
+        // fetchUserData = createAsyncThunk(
+        //   'user/fetchUserData',
+        //   async () => {
+        //     const response = await axios.get('https://example.com/api/userdata');
+        //     return response.data;
+        //   }
+        // );
+        let data= {
+              first_name: userInfo.user.name,
+              email: userInfo.user.email,
+              password:"123456",
+              password_confirmation:"123456"
+            }
+        createResponse(data).then(res => {
+          console.log('response======>',res);
+          // if (res.data.statusCode == '200') {
+          //   dispatch(login(data));
+          //   console.log('res.data.token', res.data.Data.access_token);
+          //   let value = {
+          //     token: res.data.Data.access_token,
+          //   };
+  
+          //   dispatch(token(value));
+        //   } else if (res.data.statusCode == '400') {
+        //     setInvalidMsg('Email or Password is Incorrect');
+        //   }
+        })
+        .catch(err => {
+          console.log('err', err);
+        });
+  
+        this.setState({ userInfo });
+      } catch (error) {
+        if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+          // user cancelled the login flow
+        } else if (error.code === statusCodes.IN_PROGRESS) {
+          // operation (e.g. sign in) is in progress already
+        } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+          // play services not available or outdated
+        } else {
+          // some other error happened
+        }
+      }
+    };
     return (
-      <View style={[Styles.container, {backgroundColor : ThemeColors.card}]}>
+      <ScrollView contentContainerStyle={[Styles.container, {backgroundColor : ThemeColors.card}]}>
         <View style={Styles.logoContainer}>
-          <Image source={theme === 'dark' ?   images.logo :images.logoBlack }  style={{height: 70, width: 200}} />
+          <Image source={ TopLogo }  style={{height: 130, width: 200,}} />
         </View>
-        <View style={[Styles.userNameContainer, {backgroundColor : ThemeColors.card}]}>
+        <View style={[Styles.userNameContainer, {backgroundColor : ThemeColors.card }]}>
           <TextInput
             style={Styles.userNameInput}
             placeholder="Phone number, username or email"
@@ -84,9 +150,12 @@ const navigation = useNavigation();
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <Image source={images.facebookLogo} style={{width: 20, height: 20}} />
-          <TouchableOpacity style={{alignItems: 'center', marginStart: 10}}>
-            <Text style={{color: '#008bef'}}>Log In With Facebook</Text>
+          <Image source={googleLogo} style={{width: 20, height: 20}} />
+          <TouchableOpacity style={{alignItems: 'center', marginStart: 10}}
+                  onPress={()=> signIn()}
+
+          >
+            <Text style={{color: '#008bef'}}>Log In With Google</Text>
           </TouchableOpacity>
         </View>
         <View style={{flexDirection: 'row', marginTop: 50}}>
@@ -108,7 +177,7 @@ const navigation = useNavigation();
             <Text style={{color: '#008bef'}}> Sign Up.</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </ScrollView>
     );
   }
   const Stack = createStackNavigator();
@@ -184,6 +253,7 @@ const Styles = StyleSheet.create({
   forgotPasswordContainer: {
     alignItems: 'flex-end',
     marginEnd: 20,
+
   },
   forgotPasswordText: {
     color: '#0088f8',

@@ -9,10 +9,13 @@ import DirectMessageScreen from './home/DirectMessage/DirectMessageScreen';
 import StoryScreen from './home/story/StoryScreen';
 import colors from '../../res/colors';
 import { useTheme } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {useColorScheme} from 'react-native';
 
 
 export default function MainNavigator({navigation}) {
   const ThemeColors = useTheme().colors;
+  const theme = useColorScheme();
 
   const Stack = createStackNavigator();
   const NavigateToStoryCamera = () => navigation.navigate('StoryCamera');
@@ -90,10 +93,18 @@ export default function MainNavigator({navigation}) {
           },
           headerLeft: () => (
             <TouchableOpacity onPress={() => navigation.navigate('MainScreen')}>
-              <Image
+              {/* <Image
                 source={images.dmBackButton}
-                style={{width: 20, height: 20, marginStart: 10}}
-              />
+                style={{width: 20, height: 20, marginStart: 10 , backgroundColor :'red' }}
+              /> */}
+              
+
+
+              <Icon name="chevron-left" size={30} color= {theme === 'dark' ? 'white' : 'black'} style={{ width: 33,height: 33,marginStart: 15,}}/>
+
+
+
+
             </TouchableOpacity>
           ),
           headerRight: () => (

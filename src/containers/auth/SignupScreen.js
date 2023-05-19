@@ -1,12 +1,3 @@
-// {
-// 	"user": {
-// 		"first_name":"ali",
-// 		"email":"ali.raza@aldaimsolutions.com",
-// 		"password":"123456",
-// 		"password_confirmation":"123456"
-// 	}
-// }
-
 import React, {useState} from 'react';
 import {
   View,
@@ -17,14 +8,17 @@ import {
   Image,
   TextComponent,
   Alert,
+  ScrollView,
 } from 'react-native';
 import {useColorScheme} from 'react-native';
 import images from 'res/images';
+import Logo from '../../res/images/L1.png'
 import {
   
   GoogleSigninButton,
 } from '@react-native-google-signin/google-signin';
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
+import { useTheme } from '@react-navigation/native';
 
 import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
@@ -41,6 +35,7 @@ const SignupScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const theme = useColorScheme();
+  const ThemeColors = useTheme().colors;
 
   const handleSignup = () => {
     // Perform sign up logic here
@@ -104,18 +99,26 @@ const SignupScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={{ flexGrow  :1,
+      backgroundColor:ThemeColors.card,
+      fontSize: 18,
+      fontWeight: 'bold',
+      textAlign: 'center',
+      alignItems: 'center',
+      justifyContent: 'center',
+  }}>
       <Image
-        source={theme === 'dark' ? images.logo : images.logoBlack}
-        style={{height: 70, width: 200}}
+        source={Logo}
+        style={{height: 130, width: 200, marginTop : 20  }}
       />
-      <View style={{marginVertical: 30}}>
+      <View style={{marginBottom: 30, marginTop :-10}}>
         <Text
           style={{
             fontSize: 20,
             textAlign: 'center',
             fontWeight: 'bold',
             marginHorizontal: 20,
+            color : ThemeColors.text
           }}>
           Sign up to see photos and videos from your friends.
         </Text>
@@ -123,18 +126,23 @@ const SignupScreen = () => {
       <TextInput
         style={styles.input}
         placeholder="Mobile Number"
+        placeholderTextColor={'grey'}
         value={username}
         onChangeText={setUsername}
       />
       <TextInput
         style={styles.input}
         placeholder="First Name"
+        placeholderTextColor={'grey'}
+
         value={username}
         onChangeText={setUsername}
       />
       <TextInput
         style={styles.input}
         placeholder="Last Name"
+        placeholderTextColor={'grey'}
+
         value={username}
         onChangeText={setUsername}
       />
@@ -142,12 +150,16 @@ const SignupScreen = () => {
         style={styles.input}
         placeholder="Email"
         keyboardType="email-address"
+        placeholderTextColor={'grey'}
+
         value={email}
         onChangeText={setEmail}
       />
       <TextInput
         style={styles.input}
         placeholder="Password"
+        placeholderTextColor={'grey'}
+
         secureTextEntry={true}
         value={password}
         onChangeText={setPassword}
@@ -156,23 +168,20 @@ const SignupScreen = () => {
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
       <GoogleSigninButton
-        style={{width: 192, height: 48}}
+    style={{width: 192, height: 48, marginBottom: 32    }}
         size={GoogleSigninButton.Size.Wide}
         color={GoogleSigninButton.Color.Dark}
         onPress={()=> signIn()}
         // disabled={this.state.isSigninInProgress}
       />
       
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+   
   },
   logo: {
     fontSize: 48,
@@ -189,12 +198,16 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   button: {
-    backgroundColor: 'blue',
-    paddingVertical: 16,
-    paddingHorizontal: 32,
-    borderRadius: 8,
+    alignItems: 'center',
+    height: 40,
+    marginTop: 30,
+    backgroundColor: '#0088f8',
+    justifyContent: 'center',
+    marginStart: 20,
+    marginEnd: 20,
+    borderRadius: 5,
     width: '80%',
-    marginBottom : 20
+
   },
   buttonText: {
     color: '#fff',

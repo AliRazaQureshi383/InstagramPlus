@@ -60,6 +60,8 @@ export default function TabNavigator({NavigateToStoryCamera}) {
           },
         })}>
         <Tab.Screen name="Home" component={homeNavigator} 
+         options={{
+          headerShown: false,}}
         />
         <Tab.Screen name="Search"  
       options={{
