@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import {useColorScheme} from 'react-native';
 import images from 'res/images';
-import Logo from '../../res/images/L1.png'
+import Logo from '../../res/images/logo1b2.png'
 import {
   
   GoogleSigninButton,
@@ -109,7 +109,7 @@ const SignupScreen = () => {
   }}>
       <Image
         source={Logo}
-        style={{height: 130, width: 200, marginTop : 20  }}
+        style={{height: 150, width: ('70%'), resizeMode  :'contain', marginTop : 20  }}
       />
       <View style={{marginBottom: 30, marginTop :-10}}>
         <Text

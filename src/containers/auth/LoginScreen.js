@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import images from 'res/images';
-import Logo from '../../res/images/L1.png'
+import Logo from '../../res/images/logo1b2.png'
 
 export default function LoginScreen({_signInAsync}) {
   return (
@@ -16,7 +16,7 @@ export default function LoginScreen({_signInAsync}) {
       <View style={Styles.logoContainer}>
       <Image
         source={Logo}
-        style={{height: 180, width: 200, }}
+        style={{height: 150, width: ('70%'), resizeMode  :'contain' }}
       />
       </View>
       <View style={Styles.userNameContainer}>
