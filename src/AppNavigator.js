@@ -21,7 +21,7 @@ import MainNavigator from './containers/main/MainNavigator';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import images from 'res/images';
 import googleLogo from '../src/res/images/googleLogo.png'
-import TopLogo from '../src/res/images/L1.png'
+import TopLogo from '../src/res/images/logo1b2.png'
 import colors from './res/colors';
 import { NavigationContainer, useTheme } from '@react-navigation/native';
 import { useColorScheme } from 'react-native';
@@ -99,7 +99,7 @@ const navigation = useNavigation();
     return (
       <ScrollView contentContainerStyle={[Styles.container, {backgroundColor : ThemeColors.card}]}>
         <View style={Styles.logoContainer}>
-          <Image source={ TopLogo }  style={{height: 130, width: 200,}} />
+          <Image source={ TopLogo }  style={{height: 150, width: ('70%'), resizeMode  :'contain'}} />
         </View>
         <View style={[Styles.userNameContainer, {backgroundColor : ThemeColors.card }]}>
           <TextInput
