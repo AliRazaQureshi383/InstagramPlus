@@ -16,7 +16,7 @@ export default function LoginScreen({_signInAsync}) {
       <View style={Styles.logoContainer}>
       <Image
         source={Logo}
-        style={{height: 150, width: ('70%'), resizeMode  :'contain'}}
+        style={{height: 150, width: ('70%'), resizeMode  :'contain' }}
       />
       </View>
       <View style={Styles.userNameContainer}>
