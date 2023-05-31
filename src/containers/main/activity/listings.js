@@ -4,7 +4,8 @@ import palette from 'res/palette';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { useTheme } from '@react-navigation/native';
-
+import { useMarketListingsQuery } from '../../../services/api';
+import { useEffect } from 'react';
 export default function listings() {
   const navigation = useNavigation();
   const value = useSelector((state)=> state);
@@ -12,6 +13,12 @@ export default function listings() {
   const ThemeColors = useTheme().colors;
 
   const category = value.loginReducer.data;
+  const token = value.loginReducer.token;
+
+  const responseInfo = useMarketListingsQuery(token);
+  console.log('responseInfo',responseInfo.currentData);
+
+
   return (
 
     <View style={[palette.container.center, {backgroundColor : ThemeColors.card}]}>

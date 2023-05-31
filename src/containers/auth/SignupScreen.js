@@ -32,14 +32,14 @@ const SignupScreen = () => {
 
   const navigation = useNavigation();
   const [username, setUsername] = useState('');
+  const [firstName, setFirstName] = useState('');
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const theme = useColorScheme();
   const ThemeColors = useTheme().colors;
 
-  const handleSignup = () => {
-    // Perform sign up logic here
-  };
+
   useEffect(() => {
     GoogleSignin.configure({
       webClientId:
@@ -47,12 +47,32 @@ const SignupScreen = () => {
     });
   }, []);
 
+
+const ManualSignIn = ()=>{
+  let data= {
+    first_name: firstName,
+    email: email,
+    password: password,
+  }
+createResponse(data).then(res => {
+console.log('response======>',res);
+res && (navigation.navigate('Login'), Alert.alert('Signin Successfull')  )
+
+})
+.catch(err => {
+console.log('err', err);
+});
+}
+
   const signIn = async () => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       console.log('userInfo',userInfo.user);
-      userInfo.user.email && (navigation.navigate('Login'), Alert.alert('Signin Successfull')  )
+      userInfo.user.email && (setEmail(userInfo.user.email), setPassword("zxcvbnmm"), setFirstName(userInfo.user.name))
+      
+      
+      // (navigation.navigate('Login'), Alert.alert('Signin Successfull')  )
       // fetchUserData = createAsyncThunk(
       //   'user/fetchUserData',
       //   async () => {
@@ -60,30 +80,8 @@ const SignupScreen = () => {
       //     return response.data;
       //   }
       // );
-      let data= {
-        		first_name: userInfo.user.name,
-        		email: userInfo.user.email,
-        		password:"123456",
-        		password_confirmation:"123456"
-        	}
-      createResponse(data).then(res => {
-        console.log('response======>',res);
-        // if (res.data.statusCode == '200') {
-        //   dispatch(login(data));
-        //   console.log('res.data.token', res.data.Data.access_token);
-        //   let value = {
-        //     token: res.data.Data.access_token,
-        //   };
-
-        //   dispatch(token(value));
-      //   } else if (res.data.statusCode == '400') {
-      //     setInvalidMsg('Email or Password is Incorrect');
-      //   }
-      })
-      .catch(err => {
-        console.log('err', err);
-      });
-
+    
+ManualSignIn();
       this.setState({ userInfo });
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -127,24 +125,22 @@ const SignupScreen = () => {
         style={styles.input}
         placeholder="Mobile Number"
         placeholderTextColor={'grey'}
-        value={username}
-        onChangeText={setUsername}
+        // value={username}
+        // onChangeText={setUsername}
       />
       <TextInput
         style={styles.input}
         placeholder="First Name"
         placeholderTextColor={'grey'}
 
-        value={username}
-        onChangeText={setUsername}
+        value={firstName}
+        onChangeText={setFirstName}
       />
       <TextInput
         style={styles.input}
         placeholder="Last Name"
         placeholderTextColor={'grey'}
 
-        value={username}
-        onChangeText={setUsername}
       />
       <TextInput
         style={styles.input}
@@ -164,7 +160,7 @@ const SignupScreen = () => {
         value={password}
         onChangeText={setPassword}
       />
-      <TouchableOpacity style={styles.button} onPress={handleSignup}>
+      <TouchableOpacity style={styles.button} onPress={ManualSignIn}>
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
       <GoogleSigninButton

@@ -3,12 +3,13 @@ import {createSlice} from '@reduxjs/toolkit';
 const initialState = {
     booster:null,
     email:null,
-    id:"ssssss))o0o0o0dfsdncvnsd",
+    id: null,
     income:null,
     name:null,
     password:null,
     referralId:null,
     status:null,
+    token : null,
     data:[{
       _id: '62fe244f58f7aa8230817f89',
       title: 'Garments',
@@ -36,18 +37,20 @@ const loginReducer = createSlice({
   initialState,
   reducers: {
     login(state, action) {
-      let number = action.payload?.income;
-      const flooredNumber = parseFloat(number.toFixed(4));
+      // let number = action.payload?.income;
+      // const flooredNumber = parseFloat(number.toFixed(4));
 
-      console.log('income recived to reducer ....>>', action.payload?.income); 
-      state.booster=action.payload?.booster,
-      state.email=action.payload?.email,
-      state.id=action.payload?.id,
-      state.income=flooredNumber,
-      state.name=action.payload?.name,
-      state.password=action.payload?.password,
-      state.referralId=action.payload?.referralId,
-      state.status=action.payload?.status
+      console.log('income recived to reducer ....>>', action.payload); 
+      // state.booster=action.payload?.booster,
+      // state.email=action.payload?.email,
+      // state.id=action.payload?.id,
+      // state.income=flooredNumber,
+      // state.name=action.payload?.name,
+      // state.password=action.payload?.password,
+      // state.referralId=action.payload?.referralId,
+      // state.status=action.payload?.status
+      state.token=action.payload?.token
+
       
     },
 
